@@ -221,6 +221,7 @@ void king_bobomb_act_been_thrown(void) { // act 4
     if (o->oPosY - o->oHomeY > -100.0f) { // not thrown off hill
         if (o->oMoveFlags & OBJ_MOVE_LANDED) {
             o->oHealth--;
+            gMarioState->comboTime = COMBO_MAX_TIME;
 
             o->oForwardVel = 0.0f;
             o->oVelY = 0.0f;

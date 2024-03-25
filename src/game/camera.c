@@ -6259,11 +6259,8 @@ s16 camera_course_processing(struct Camera *c) {
                             break;
 
                         case SURFACE_BOSS_FIGHT_CAMERA:
-                            if (gCurrActNum == 1) {
-                                set_camera_mode_boss_fight(c);
-                            } else {
-                                set_camera_mode_radial(c, 60);
-                            }
+                            transition_to_camera_mode(c, CAMERA_MODE_8_DIRECTIONS, 90);
+                            s8DirModeBaseYaw = DEGREES(90);
                             break;
                         default:
                             set_camera_mode_radial(c, 60);

@@ -18,5 +18,7 @@ const MacroObject ddd_seg7_area_1_macro_objs[] = {
     MACRO_OBJECT(/*preset*/ macro_fish_group,           /*yaw*/   0, /*pos*/ -2020, -3460,  -120),
     MACRO_OBJECT(/*preset*/ macro_coin_ring_vertical,   /*yaw*/  90, /*pos*/     0, -4250,     0),
     MACRO_OBJECT(/*preset*/ macro_coin_ring_vertical,   /*yaw*/  90, /*pos*/ -2000, -4250,     0),
+    MACRO_OBJECT(/*preset*/ macro_coin_line_vertical,   /*yaw*/   0, /*pos*/ 3000, -4250,  0),
+    MACRO_OBJECT(/*preset*/ macro_coin_line_vertical,   /*yaw*/   0, /*pos*/ 3000, -3250,  0),
     MACRO_OBJECT_END(),
 };

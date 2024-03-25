@@ -443,6 +443,11 @@ void warp_level(void) {
 
     level_control_timer(TIMER_CONTROL_HIDE);
 
+    if (gCurrLevelNum != LEVEL_CASTLE && gCurrLevelNum != LEVEL_CASTLE_COURTYARD && gCurrLevelNum != LEVEL_CASTLE_GROUNDS && gCurrLevelNum != LEVEL_BITDW && gCurrLevelNum != LEVEL_BITS && gCurrLevelNum != LEVEL_BITFS && gCurrLevelNum != LEVEL_BOWSER_1 && gCurrLevelNum != LEVEL_BOWSER_2 && gCurrLevelNum != LEVEL_BOWSER_3 && gCurrLevelNum != LEVEL_SA && gCurrLevelNum != LEVEL_PSS && gCurrLevelNum != LEVEL_WMOTR && gCurrLevelNum != LEVEL_COTMC && gCurrLevelNum != LEVEL_VCUTM && gCurrLevelNum != LEVEL_TOTWC) {
+    gMarioState->comboTime = COMBO_MAX_TIME;
+                gMarioState->comboCount = 1;
+    }
+
     load_area(sWarpDest.areaIdx);
     init_mario_after_warp();
 }

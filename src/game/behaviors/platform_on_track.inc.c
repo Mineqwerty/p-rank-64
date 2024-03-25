@@ -371,6 +371,10 @@ void bhv_platform_on_track_update(void) {
             break;
         case PLATFORM_ON_TRACK_ACT_MOVE_ALONG_TRACK:
             platform_on_track_act_move_along_track();
+            if (gMarioObject->platform == o) {
+            platform_on_track_act_move_along_track();
+            platform_on_track_act_move_along_track();
+            }
             break;
         case PLATFORM_ON_TRACK_ACT_PAUSE_BRIEFLY:
             platform_on_track_act_pause_briefly();

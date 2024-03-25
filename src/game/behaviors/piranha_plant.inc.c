@@ -47,6 +47,10 @@ s32 piranha_plant_check_interactions(void) {
                 spawn_object(o, MODEL_PURPLE_MARBLE, bhvPurpleParticle);
             }
             o->oAction = PIRANHA_PLANT_ACT_ATTACKED;
+            gMarioState->comboTime = COMBO_MAX_TIME;
+            if (o->oNumLootCoins > 0) {
+                gMarioState->comboCount += 1;
+            }
         } else {
             o->oAction = PIRANHA_PLANT_ACT_WOKEN_UP;
         }

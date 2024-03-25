@@ -131,8 +131,12 @@ void mr_i_body_act_spin_death(void) {
             if (o->oBehParams2ndByte != MR_I_BP_NORMAL) {
                 o->oPosY += 100.0f;
                 spawn_default_star(1370, 2000.0f, -320.0f);
+                gMarioState->comboTime = COMBO_MAX_TIME;
+            gMarioState->comboCount += 1;
                 obj_mark_for_deletion(o);
             } else {
+                gMarioState->comboTime = COMBO_MAX_TIME;
+            gMarioState->comboCount += 1;
                 cur_obj_spawn_loot_blue_coin();
             }
         }

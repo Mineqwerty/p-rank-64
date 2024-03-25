@@ -45,7 +45,11 @@ void bobomb_check_interactions(void) {
     obj_set_hitbox(o, &sBobombHitbox);
 
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
-        if (o->oInteractStatus & INT_STATUS_MARIO_KNOCKBACK_DMG) {
+        if (o->oInteractStatus & INT_STATUS_MARIO_KNOCKBACK_DMG && o->oAction != BOBOMB_ACT_LAUNCHED) {
+            gMarioState->comboTime = COMBO_MAX_TIME;
+            if (!(GET_BPARAM3(o->oBehParams) & RESPAWN_INFO_TYPE_NORMAL)) {
+            gMarioState->comboCount += 1;
+            }
             o->oMoveAngleYaw = gMarioObject->header.gfx.angle[1];
             o->oForwardVel = 25.0f;
             o->oVelY = 30.0f;
@@ -205,6 +209,10 @@ void bobomb_thrown_loop(void) {
     o->oFlags &= ~OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
     o->oForwardVel = 25.0f;
     o->oVelY = 20.0f;
+    gMarioState->comboTime = COMBO_MAX_TIME;
+    if (!(GET_BPARAM3(o->oBehParams) & RESPAWN_INFO_TYPE_NORMAL)) {
+    gMarioState->comboCount += 1;
+    }
     o->oAction = BOBOMB_ACT_LAUNCHED;
 }
 

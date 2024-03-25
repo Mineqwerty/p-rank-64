@@ -9,7 +9,7 @@
  * You may also need to change sLevelsWithRooms in object_helpers.c.
  * TODO: separate this into separate defines, behavior params, or make these mechanics otherwise dynamic.
 */
-// #define ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
+ #define ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
 
 // Disables lives and hides the lives counter.
 #define DISABLE_LIVES
@@ -33,10 +33,10 @@
 #define X_COIN_STAR 100
 
 // Stars don't kick you out of the level (does not play nicely with vanilla).
-// #define NON_STOP_STARS
+ #define NON_STOP_STARS
 
 // Bowser keys always exit the level. Only has an effect if NON_STOP_STARS is enabled.
-// #define KEYS_EXIT_LEVEL
+ #define KEYS_EXIT_LEVEL
 
 // Uncomment this if you want global star IDs (useful for creating an open world hack ala MVC).
 // #define GLOBAL_STAR_IDS

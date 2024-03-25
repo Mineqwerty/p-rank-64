@@ -12,6 +12,8 @@
 #define BITMASK(size) ((BIT(size)) - 1)
 #define SHIFTED_BITMASK(size, shift) (BITMASK(size) << shift)
 
+#define COMBO_MAX_TIME 450
+
 // #define COND_BIT(cond, dst, flag) { (dst) &= ~(flag); if (cond) (dst) |= (flag); }
 #define COND_BIT(cond, dst, flag) { \
     if ((cond)) {                   \
@@ -458,6 +460,7 @@ struct MarioState {
     /*0xA4*/ u32 collidedObjInteractTypes;
     /*0xA8*/ s16 numCoins;
     /*0xAA*/ s16 numStars;
+    u8 starFlags;
     /*0xAC*/ s8 numKeys; // Unused key mechanic
     /*0xAD*/ s8 numLives;
     /*0xAE*/ s16 health;
@@ -471,6 +474,9 @@ struct MarioState {
     /*0xBC*/ f32 peakHeight;
     /*0xC0*/ f32 quicksandDepth;
     /*0xC4*/ f32 windGravity;
+
+    s32 comboTime;
+    s32 comboCount;
     // -- HackerSM64 MarioState fields begin --
 #ifdef BREATH_METER
              s16 breath;

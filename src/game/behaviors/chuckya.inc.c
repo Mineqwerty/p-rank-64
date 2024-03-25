@@ -153,6 +153,8 @@ void chuckya_act_2(void) {
         obj_mark_for_deletion(o);
         obj_spawn_loot_yellow_coins(o, 5, 20.0f);
         spawn_mist_particles_with_sound(SOUND_OBJ_CHUCKYA_DEATH);
+        gMarioState->comboTime = COMBO_MAX_TIME;
+        gMarioState->comboCount += 1;
     }
 }
 

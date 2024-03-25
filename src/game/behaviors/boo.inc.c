@@ -271,6 +271,8 @@ static s32 boo_update_during_death(void) {
         o->oMoveAngleYaw = gMarioObject->oMoveAngleYaw;
         o->oBooDeathStatus = BOO_DEATH_STATUS_DYING;
         o->oFlags &= ~OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
+        gMarioState->comboTime = COMBO_MAX_TIME;
+        gMarioState->comboCount += 1;
     } else {
         if (o->oTimer == 5) {
             o->oBooTargetOpacity = 0;
@@ -452,19 +454,12 @@ static void boo_act_4(void) {
 
     // If there are no remaining "minion" boos, show the dialog of the Big Boo
     if (cur_obj_nearest_object_with_behavior(bhvGhostHuntBoo) == NULL) {
-        dialogID = DIALOG_108;
-    } else {
-        dialogID = DIALOG_107;
-    }
+        play_puzzle_jingle();
+    } 
 
-    if (cur_obj_update_dialog(MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_TEXT_DEFAULT, dialogID, 0)) {
-        create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+        //create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
         obj_mark_for_deletion(o);
-
-        if (dialogID == DIALOG_108) { // If the Big Boo should spawn, play the jingle
-            play_puzzle_jingle();
-        }
-    }
+    
 }
 
 static ObjActionFunc sBooActions[] = {
@@ -604,11 +599,15 @@ static void big_boo_act_3(void) {
             } else {
                 big_boo_spawn_balcony_star();
             }
+
+            gMarioState->comboTime = COMBO_MAX_TIME;
+            gMarioState->comboCount += 1;
         }
     } else {
         if (o->oTimer == 0) {
             spawn_mist_particles();
             o->oBooBaseScale -= 0.5f;
+            gMarioState->comboTime = COMBO_MAX_TIME;
         }
 
         if (big_boo_update_during_nonlethal_hit(40.0f)) {
@@ -626,9 +625,9 @@ static void big_boo_act_4(void) {
         if (o->oTimer > 60 && o->oDistanceToMario < 600.0f) {
             obj_set_pos(o,  973, 0, 717);
 
-            spawn_object_relative(0, 0, 0,    0, o, MODEL_BBH_STAIRCASE_STEP, bhvBooStaircase);
-            spawn_object_relative(1, 0, 0, -200, o, MODEL_BBH_STAIRCASE_STEP, bhvBooStaircase);
-            spawn_object_relative(2, 0, 0,  200, o, MODEL_BBH_STAIRCASE_STEP, bhvBooStaircase);
+            //spawn_object_relative(0, 0, 0,    0, o, MODEL_BBH_STAIRCASE_STEP, bhvBooStaircase);
+            //spawn_object_relative(1, 0, 0, -200, o, MODEL_BBH_STAIRCASE_STEP, bhvBooStaircase);
+            //spawn_object_relative(2, 0, 0,  200, o, MODEL_BBH_STAIRCASE_STEP, bhvBooStaircase);
 
             obj_mark_for_deletion(o);
         }

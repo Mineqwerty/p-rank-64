@@ -730,6 +730,15 @@ void reset_mario_pitch(struct MarioState *m) {
 u32 interact_coin(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     m->numCoins += obj->oDamageOrCoinValue;
     m->healCounter += 4 * obj->oDamageOrCoinValue;
+    if (obj->oDamageOrCoinValue == 1) {
+    gMarioState->comboTime += COMBO_MAX_TIME / 2;
+    if (gMarioState->comboTime > COMBO_MAX_TIME) {
+        gMarioState->comboTime = COMBO_MAX_TIME;
+    }
+    }
+    else {
+        gMarioState->comboTime = COMBO_MAX_TIME;
+    }
 #ifdef BREATH_METER
     m->breathCounter += (4 * obj->oDamageOrCoinValue);
 #endif
@@ -760,9 +769,22 @@ u32 interact_water_ring(struct MarioState *m, UNUSED u32 interactType, struct Ob
     return FALSE;
 }
 
+u8 collect_p_rank_star(s16 coinScore, s16 starIndex) {
+    s32 starFlag = 1 << starIndex;
+    gMarioState->starFlags |= starFlag;
+
+    if (gMarioState->starFlags == 0x7F) {
+        return 2;
+    }
+
+    if (gMarioState->starFlags == 0x3F) {
+        return 1;
+    }
+}
+
 u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     u32 starIndex;
-    u32 starGrabAction = ACT_STAR_DANCE_EXIT;
+    u32 starGrabAction = ACT_FALL_AFTER_STAR_GRAB;
 #ifdef NON_STOP_STARS
  #ifdef KEYS_EXIT_LEVEL
     u32 noExit = !obj_has_model(obj, MODEL_BOWSER_KEY);
@@ -801,20 +823,22 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         }
 
         if (noExit) {
-            starGrabAction = ACT_STAR_DANCE_NO_EXIT;
+            starGrabAction = ACT_FALL_AFTER_STAR_GRAB;
         }
 
         if (m->action & ACT_FLAG_SWIMMING) {
-            starGrabAction = ACT_STAR_DANCE_WATER;
+            starGrabAction = ACT_FALL_AFTER_STAR_GRAB;
         }
 
         if (m->action & ACT_FLAG_METAL_WATER) {
-            starGrabAction = ACT_STAR_DANCE_WATER;
+            starGrabAction = ACT_FALL_AFTER_STAR_GRAB;
         }
 
         if (m->action & ACT_FLAG_AIR) {
             starGrabAction = ACT_FALL_AFTER_STAR_GRAB;
         }
+
+        gMarioState->comboTime = COMBO_MAX_TIME;
 
         spawn_object(obj, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
 
@@ -827,7 +851,9 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
 #else
         starIndex = (obj->oBehParams >> 24) & 0x1F;
 #endif
-        save_file_collect_star_or_key(m->numCoins, starIndex);
+        if (collect_p_rank_star(m->numCoins, starIndex) == 1) {
+            starGrabAction = ACT_STAR_DANCE_EXIT;
+        }
 
         m->numStars =
             save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
@@ -849,6 +875,8 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
 
     return FALSE;
 }
+
+
 
 u32 interact_bbh_entrance(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     if (m->action != ACT_BBH_ENTER_SPIN && m->action != ACT_BBH_ENTER_JUMP) {
@@ -1591,6 +1619,7 @@ u32 interact_cap(struct MarioState *m, UNUSED u32 interactType, struct Object *o
 
         play_sound(SOUND_MENU_STAR_SOUND, m->marioObj->header.gfx.cameraToObject);
         play_sound(SOUND_MARIO_HERE_WE_GO, m->marioObj->header.gfx.cameraToObject);
+        gMarioState->comboTime = COMBO_MAX_TIME;
 
         if (capMusic != 0) {
             play_cap_music(capMusic);

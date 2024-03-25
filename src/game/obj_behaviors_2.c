@@ -566,35 +566,48 @@ static s32 obj_handle_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioActi
 
                 case ATTACK_HANDLER_DIE_IF_HEALTH_NON_POSITIVE:
                     obj_die_if_health_non_positive();
+                    gMarioState->comboTime = COMBO_MAX_TIME;
+                    gMarioState->comboCount += 1;
                     break;
 
                 case ATTACK_HANDLER_KNOCKBACK:
                     obj_set_knockback_action(attackType);
+                    gMarioState->comboTime = COMBO_MAX_TIME;
+                    gMarioState->comboCount += 1;
                     break;
 
                 case ATTACK_HANDLER_SQUISHED:
                     obj_set_squished_action();
+                    gMarioState->comboTime = COMBO_MAX_TIME;
+                    gMarioState->comboCount += 1;
                     break;
 
                 case ATTACK_HANDLER_SPECIAL_KOOPA_LOSE_SHELL:
                     shelled_koopa_attack_handler(attackType);
+                    gMarioState->comboTime = COMBO_MAX_TIME;
+                    gMarioState->comboCount += 1;
                     break;
 
                 case ATTACK_HANDLER_SET_SPEED_TO_ZERO:
                     obj_set_speed_to_zero();
+                    gMarioState->comboTime = COMBO_MAX_TIME;
                     break;
 
                 case ATTACK_HANDLER_SPECIAL_WIGGLER_JUMPED_ON:
                     wiggler_jumped_on_attack_handler();
+                    gMarioState->comboTime = COMBO_MAX_TIME;
                     break;
 
                 case ATTACK_HANDLER_SPECIAL_HUGE_GOOMBA_WEAKLY_ATTACKED:
                     huge_goomba_weakly_attacked();
+                    gMarioState->comboTime = COMBO_MAX_TIME;
                     break;
 
                 case ATTACK_HANDLER_SQUISHED_WITH_BLUE_COIN:
                     o->oNumLootCoins = -1;
                     obj_set_squished_action();
+                    gMarioState->comboTime = COMBO_MAX_TIME;
+                    gMarioState->comboCount += 1;
                     break;
             }
 
@@ -682,6 +695,8 @@ static s32 obj_check_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioActio
             }
         } else {
             attackType = o->oInteractStatus & INT_STATUS_ATTACK_MASK;
+            gMarioState->comboTime = COMBO_MAX_TIME;
+            gMarioState->comboCount += 1;
             obj_die_if_health_non_positive();
             o->oInteractStatus = INT_STATUS_NONE;
             return attackType;

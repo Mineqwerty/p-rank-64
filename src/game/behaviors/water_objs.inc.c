@@ -27,6 +27,7 @@ void bhv_water_air_bubble_loop(void) {
     o->oPosZ += random_float() * 4.0f - 2.0f;
 
     if (o->oInteractStatus & INT_STATUS_INTERACTED || o->oTimer > 200) {
+        gMarioState->comboTime = COMBO_MAX_TIME;
         cur_obj_play_sound_2(SOUND_GENERAL_QUIET_BUBBLE);
         obj_mark_for_deletion(o);
         for (i = 0; i < 30; i++) {

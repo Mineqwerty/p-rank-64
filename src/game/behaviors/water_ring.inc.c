@@ -69,6 +69,7 @@ void water_ring_check_collection(UNUSED f32 avgScale, struct Object *ringManager
                     play_sound(SOUND_MENU_COLLECT_SECRET
                                 + (((u8) ringSpawner->oWaterRingSpawnerRingsCollected - 1) << 16),
                                 gGlobalSoundSource);
+                                gMarioState->comboTime = COMBO_MAX_TIME;
                 }
                 ringManager->oWaterRingMgrLastRingCollected = o->oWaterRingIndex;
             } else {

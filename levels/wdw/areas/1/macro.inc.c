@@ -58,6 +58,7 @@ const MacroObject wdw_seg7_area_1_macro_objs[] = {
     MACRO_OBJECT(/*preset*/ macro_box_ten_coins,               /*yaw*/   0, /*pos*/ -3760,   700,  4120),
     MACRO_OBJECT(/*preset*/ macro_box_three_coins,             /*yaw*/   0, /*pos*/  3388,  1600,  1155),
     MACRO_OBJECT(/*preset*/ macro_coin_line_horizontal,        /*yaw*/  90, /*pos*/   740,  3072, -3560),
+    MACRO_OBJECT(/*preset*/ macro_coin_line_horizontal,        /*yaw*/  90, /*pos*/   3410,  -1600, -3290),
     MACRO_OBJECT(/*preset*/ macro_box_star_2,                  /*yaw*/   0, /*pos*/  1550,  4350,   100),
     MACRO_OBJECT_WITH_BEH_PARAM(/*preset*/ macro_wooden_signpost,             /*yaw*/   0, /*pos*/   740,  3060, -3680, /*behParam*/ DIALOG_053),
     MACRO_OBJECT(/*preset*/ macro_breakable_box_three_coins,   /*yaw*/   0, /*pos*/  4500,     0,  1040),

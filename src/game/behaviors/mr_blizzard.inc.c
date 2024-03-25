@@ -199,6 +199,7 @@ static void mr_blizzard_act_death(void) {
     if (clamp_f32(&o->oMrBlizzardDizziness, -0x4000, 0x4000)) {
         if (o->oMrBlizzardChangeInDizziness != 0.0f) {
             cur_obj_play_sound_2(SOUND_OBJ_SNOW_SAND1);
+            
             // If Mr. Blizzard is wearing Mario's cap, clear
             // the save flag and spawn Mario's cap.
             if (o->oAnimState != 0) {
@@ -235,10 +236,13 @@ static void mr_blizzard_act_death(void) {
         }
 
         if (o->oMrBlizzardScale != 0.0f) {
+            gMarioState->comboTime = COMBO_MAX_TIME;
             if ((o->oMrBlizzardScale -= 0.03f) <= 0.0f) {
                 o->oMrBlizzardScale = 0.0f;
                 if (!GET_BPARAM3(o->oBehParams)) {
                     obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+                    
+                    gMarioState->comboCount += 1;
                     set_object_respawn_info_bits(o, RESPAWN_INFO_TYPE_NORMAL);
                 }
             }

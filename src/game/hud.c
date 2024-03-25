@@ -17,6 +17,7 @@
 #include "engine/math_util.h"
 #include "puppycam2.h"
 #include "puppyprint.h"
+#include "actors/group0.h"
 
 #include "config.h"
 
@@ -44,6 +45,8 @@
 
 OSTime frameTimes[FRAMETIME_COUNT];
 u8 curFrameTimeIndex = 0;
+
+s16 comboHeight = 90;
 
 #include "PR/os_convert.h"
 
@@ -573,7 +576,7 @@ void render_hud(void) {
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
-            render_hud_stars();
+            //render_hud_stars();
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
@@ -597,6 +600,40 @@ void render_hud(void) {
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_TIMER) {
             render_hud_timer();
+        }
+
+        Mtx *mtx = alloc_display_list(sizeof(Mtx));
+
+    if (mtx == NULL) {
+        return;
+    }
+
+    if (gMarioState->comboCount > 0 && comboHeight > 0) {
+        comboHeight -= 3;
+    }
+    else if (gMarioState->comboCount == 0 && comboHeight < 90) {
+        comboHeight += 3;
+    }
+
+        guTranslate(mtx, (f32) 280, (f32) 200 + comboHeight, 0);
+    
+    gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
+    gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx++),
+              G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
+    
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, 0.4f, 0.4f, 1.0f);
+
+create_dl_translation_matrix(MENU_MTX_PUSH, 28 - ((COMBO_MAX_TIME - gMarioState->comboTime) / 7), 0, 0);
+        gSPDisplayList(gDisplayListHead++, &combo_ghost_Plane_001_mesh);
+        gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+    gSPDisplayList(gDisplayListHead++, &combo_meter_Plane_mesh);
+
+        gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+        if (gMarioState->comboCount > 0 && comboHeight < 50) {
+
+        print_text_fmt_int(245, 180 + comboHeight, "%d", gMarioState->comboCount);
         }
 
         if (gSurfacePoolError & NOT_ENOUGH_ROOM_FOR_SURFACES) print_text(10, 40, "SURFACE POOL FULL");

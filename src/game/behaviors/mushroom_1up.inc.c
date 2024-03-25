@@ -3,6 +3,7 @@
 void bhv_1up_interact(void) {
     if (obj_check_if_collided_with_object(o, gMarioObject)) {
         play_sound(SOUND_GENERAL_COLLECT_1UP, gGlobalSoundSource);
+        gMarioState->comboTime = COMBO_MAX_TIME;
 #ifdef MUSHROOMS_HEAL
         gMarioState->healCounter   = 31;
 #ifdef BREATH_METER

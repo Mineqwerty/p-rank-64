@@ -30,3 +30,6 @@
 #include "src/s2d_engine/config.h"
 #include FONT_C_FILE
 #endif
+
+#include "combo_meter/model.inc.c"
+#include "combo_ghost/model.inc.c"

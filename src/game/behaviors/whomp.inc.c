@@ -156,6 +156,8 @@ void king_whomp_on_ground(void) {
         if (cur_obj_is_mario_ground_pounding_platform()) {
             Vec3f pos;
             o->oHealth--;
+            gMarioState->comboTime = COMBO_MAX_TIME;
+            gMarioState->comboCount += 1;
             cur_obj_play_sound_2(SOUND_OBJ2_WHOMP_SOUND_SHORT);
             cur_obj_play_sound_2(SOUND_OBJ_KING_WHOMP_DEATH);
             if (o->oHealth == 0) {
@@ -189,6 +191,8 @@ void whomp_on_ground(void) {
     if (o->oSubAction == 0) {
         if (gMarioObject->platform == o) {
             if (cur_obj_is_mario_ground_pounding_platform()) {
+                gMarioState->comboTime = COMBO_MAX_TIME;
+                gMarioState->comboCount += 1;
                 o->oNumLootCoins = 5;
                 obj_spawn_loot_yellow_coins(o, 5, 20.0f);
                 o->oAction = 8;
@@ -242,7 +246,7 @@ void whomp_die(void) {
             spawn_triangle_break_particles(20, MODEL_DIRT_ANIMATION, 3.0f, 4);
             cur_obj_shake_screen(SHAKE_POS_SMALL);
             o->oPosY += 100.0f;
-            spawn_default_star(180.0f, 3880.0f, 340.0f);
+            spawn_default_star(600.0f, 3880.0f, 600.0f);
             cur_obj_play_sound_2(SOUND_OBJ_KING_WHOMP_DEATH);
             o->oAction = 9;
         }

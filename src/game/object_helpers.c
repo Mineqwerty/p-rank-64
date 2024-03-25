@@ -1928,6 +1928,8 @@ s32 cur_obj_set_hitbox_and_die_if_attacked(struct ObjectHitbox *hitbox, s32 deat
             obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
             obj_mark_for_deletion(o);
             create_sound_spawner(deathSound);
+            gMarioState->comboTime = COMBO_MAX_TIME;
+            gMarioState->comboCount += 1;
         } else {
             interacted = TRUE;
         }
