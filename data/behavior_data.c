@@ -6087,4 +6087,33 @@ const BehaviorScript bhvIntroScene[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvPRankManager[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_p_rank_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_p_rank_loop),
+    END_LOOP(),
+};
 
+const BehaviorScript bhvMarioPRank[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_ANIMATIONS(oAnimations, prank_mario_anims),
+    //SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    ANIMATE(0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_mario_prank_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvPrankCube[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(prank_box_collision),
+    SET_FLOAT(oCollisionDistance, 20000),
+    CALL_NATIVE(bhv_prank_cube_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_prank_cube_loop),
+    END_LOOP(),
+};

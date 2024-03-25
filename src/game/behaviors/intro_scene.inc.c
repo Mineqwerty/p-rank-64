@@ -82,3 +82,45 @@ void bhv_intro_scene_loop(void) {
         gCutsceneObjSpawn = CUTSCENE_OBJ_NONE;
     }
 }
+
+void bhv_p_rank_init(void) {
+
+    save_file_collect_star_or_key(0, o->oBehParams2ndByte);
+    
+
+    spawn_object_abs_with_rot(o, 0, MODEL_P_RANK_MARIO, bhvMarioPRank, 0, -9000, 0, 0, 0, 0);
+    spawn_object_abs_with_rot(o, 0, MODEL_P_RANK_CUBE, bhvPrankCube, 0, -9000, 0, 0, 0, 0);
+}
+
+void bhv_p_rank_loop(void) {
+
+    play_secondary_music(SEQ_STREAMED_P_RANK, 0, 255, 10);
+    if (o->oTimer == 1) {
+        gCamera->cutscene = 1;
+        gLakituState.goalPos[0] = 0;
+        gLakituState.goalPos[2] = -1500.0f;
+        gLakituState.goalPos[1] = -8800.0f;
+        gLakituState.goalFocus[0] = 0;
+        gLakituState.goalFocus[2] = 0;
+        gLakituState.goalFocus[1] = -8800.0f;
+    }
+
+    if (o->oTimer == 110) {
+        play_sound(SOUND_MARIO_HERE_WE_GO, gGlobalSoundSource);
+    }
+
+    if (o->oTimer == 130) {
+        if (o->oBehParams2ndByte == 1) {
+            spawn_object_abs_with_rot(o, 0, MODEL_P_RANK_M, bhvStaticObject, 0, -9000, 0, 0, 0, 0);
+        }
+        else {
+
+        
+        spawn_object_abs_with_rot(o, 0, MODEL_P_RANK_P, bhvStaticObject, 0, -9000, 0, 0, 0, 0);
+        }
+    }
+
+    if (o->oTimer == 320) {
+        level_trigger_warp(gMarioState, WARP_OP_STAR_EXIT);
+    }
+}

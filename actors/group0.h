@@ -335,4 +335,16 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "combo_ghost/header.h"
 
+#include "prank_mario/geo_header.h"
+
+
+#include "prank_mario/anim_header.h"
+#include "prank_box/geo_header.h"
+
+#include "prank_p/geo_header.h"
+
+#include "prank_m/geo_header.h"
+
+#include "prank_box/collision_header.h"
+
 #endif

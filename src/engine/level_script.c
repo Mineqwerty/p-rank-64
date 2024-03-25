@@ -760,7 +760,7 @@ static void level_cmd_get_or_set_var(void) {
                 gCurrCourseNum = sRegister;
                 break;
             case VAR_CURR_ACT_NUM:
-                gCurrActNum = sRegister;
+                gCurrActNum = 1;
                 break;
             case VAR_CURR_LEVEL_NUM:
                 gCurrLevelNum = sRegister;

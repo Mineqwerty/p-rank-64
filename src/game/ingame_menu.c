@@ -2036,6 +2036,8 @@ void render_course_complete_lvl_info_and_hud_str(void) {
         print_hud_course_complete_coins(118, 103);
         play_star_fanfare_and_flash_hud(HUD_FLASH_STARS, (1 << (gLastCompletedStarNum - 1)));
 
+        //gLastCompletedStarNum = 1;
+
         if (gLastCompletedStarNum == 7) {
             name = segmented_to_virtual(actNameTbl[COURSE_STAGES_MAX * 6 + 1]);
         } else {

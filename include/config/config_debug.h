@@ -18,16 +18,16 @@
 // Uncomment this define and set a test level in order to boot straight into said level.
 // This allows you to quickly test the level you're working on.
 // If you want the game to boot normally, just comment out the define again.
- #define TEST_LEVEL LEVEL_WDW
+//#define TEST_LEVEL LEVEL_WDW
 
 // Enables debug level select. Hold L while the game boots to turn it on.
-#define DEBUG_LEVEL_SELECT
+//#define DEBUG_LEVEL_SELECT
 
 // Enables debug free move (D-pad up to enter, A to exit).
-#define ENABLE_DEBUG_FREE_MOVE
+//#define ENABLE_DEBUG_FREE_MOVE
 
 // Enables a custom, enhanced performance profiler. (Enables PUPPYPRINT by default in config_safeguards).
- #define PUPPYPRINT_DEBUG 1
+//#define PUPPYPRINT_DEBUG 1
 
 // Uses cycles instead of microseconds in Puppyprint debug output.
 // #define PUPPYPRINT_DEBUG_CYCLES
@@ -45,7 +45,7 @@
 
 // Same as above, but also reads all save file flags as complete.
 // This will not overwrite existing save file data unless you save over it.
- #define COMPLETE_SAVE_FILE
+//#define COMPLETE_SAVE_FILE
 
 // Removes the limit on FPS.
 // #define UNLOCK_FPS

@@ -481,6 +481,11 @@ s32 obj_begin_race(s32 noTimer) {
  * Wait for mario to approach, and then enter the show init text action.
  */
 static void koopa_the_quick_act_wait_before_race(void) {
+
+    if (gCurrLevelNum == LEVEL_THI && gMarioState->starFlags & 0x04) {
+        obj_mark_for_deletion(o);
+    }
+
     koopa_shelled_act_stopped();
 
     if (o->oKoopaTheQuickInitTextboxCooldown != 0) {

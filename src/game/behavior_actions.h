@@ -549,6 +549,9 @@ void bhv_intro_scene_loop(void);
 void bhv_dust_smoke_loop(void);
 void bhv_yoshi_loop(void);
 void bhv_volcano_trap_loop(void);
+void bhv_p_rank_init(void);
+void bhv_p_rank_loop(void);
+void bhv_mario_prank_loop(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);
 
@@ -575,3 +578,6 @@ extern struct WaterDropletParams gShallowWaterSplashDropletParams;
 extern struct WaterDropletParams gShallowWaterWaveDropletParams;
 
 #endif // BEHAVIOR_ACTIONS_H
+
+void bhv_prank_cube_init(void);
+void bhv_prank_cube_loop(void);

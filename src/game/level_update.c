@@ -447,6 +447,12 @@ void warp_level(void) {
     gMarioState->comboTime = COMBO_MAX_TIME;
                 gMarioState->comboCount = 1;
     }
+    else{
+        gMarioState->comboTime = 0;
+                gMarioState->comboCount = 0;
+    }
+
+    gMarioState->starFlags = 0;
 
     load_area(sWarpDest.areaIdx);
     init_mario_after_warp();
@@ -1339,7 +1345,7 @@ s32 lvl_set_current_level(UNUSED s16 initOrUpdate, s32 levelNum) {
         return FALSE;
     }
 
-    return !gDebugLevelSelect;
+    return FALSE;
 }
 
 /**

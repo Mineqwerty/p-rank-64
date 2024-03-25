@@ -1,6 +1,12 @@
 // hidden_star.inc.c
 
 void bhv_hidden_star_init(void) {
+
+    if (gCurrLevelNum == LEVEL_THI && gMarioState->starFlags & 0x08) {
+        obj_mark_for_deletion(o);
+        return;
+    }
+
     s16 remainingTriggers = count_objects_with_behavior(bhvHiddenStarTrigger);
     if (remainingTriggers == 0) {
         struct Object *starObj = spawn_object_abs_with_rot(o, 0, MODEL_STAR, bhvStar, o->oPosX, o->oPosY, o->oPosZ, 0, 0, 0);

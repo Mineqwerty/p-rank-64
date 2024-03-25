@@ -32,6 +32,7 @@
 #include "save_file.h"
 #include "sound_init.h"
 #include "rumble_init.h"
+#include "include/seq_ids.h"
 
 
 /**************************************************
@@ -1702,13 +1703,15 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     }
     if (gMarioState->comboTime > 0 && gCamera->cutscene == 0 && gCurrentArea->camera->mode != CAMERA_MODE_INSIDE_CANNON) {
         gMarioState->comboTime--;
+        if (gMarioState->comboTime == 0) {
+            gMarioState->health = 255;
+        gMarioState->action = ACT_STANDING_DEATH;
+    }
     }
 
     if (gMarioState->comboTime > COMBO_MAX_TIME) {
         gMarioState->comboTime = COMBO_MAX_TIME;
     }
-
-    print_text_fmt_int(100, 100, "%d", gMarioState->starFlags);
 
     // Updates once per frame:
     vec3f_get_dist_and_lateral_dist_and_angle(gMarioState->prevPos, gMarioState->pos, &gMarioState->moveSpeed, &gMarioState->lateralSpeed, &gMarioState->movePitch, &gMarioState->moveYaw);
@@ -1872,6 +1875,7 @@ void init_mario(void) {
 }
 
 void init_mario_from_save_file(void) {
+    gCurrActNum = 1;
     gMarioState->playerID = 0;
     gMarioState->flags = MARIO_NONE;
     gMarioState->action = ACT_UNINITIALIZED;

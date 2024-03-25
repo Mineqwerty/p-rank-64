@@ -42,6 +42,10 @@ void bhv_fire_piranha_plant_init(void) {
         }
     }
 
+    if (gMarioState->starFlags & 0x01) {
+        obj_mark_for_deletion(o);
+    }
+
     sNumActiveFirePiranhaPlants = sNumKilledFirePiranhaPlants = 0;
 }
 

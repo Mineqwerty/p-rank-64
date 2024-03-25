@@ -1,0 +1,14 @@
+extern const GeoLayout prank_p_geo[];
+extern Lights1 prank_p_Material_004_Logo_grp_png_f3d_lights;
+extern Lights1 prank_p_Material_001_Logo_grp_png_f3d_lights;
+extern u8 prank_p_main_menu_seg7_04468_rgba16_ci8[];
+extern u8 prank_p_main_menu_seg7_04468_rgba16_ci8_pal_rgba16[];
+extern Vtx prank_p_Logo_001_mesh_layer_1_vtx_0[48];
+extern Gfx prank_p_Logo_001_mesh_layer_1_tri_0[];
+extern Vtx prank_p_Logo_001_mesh_layer_1_vtx_1[30];
+extern Gfx prank_p_Logo_001_mesh_layer_1_tri_1[];
+extern Gfx mat_prank_p_Material_004_Logo_grp_png_f3d[];
+extern Gfx mat_revert_prank_p_Material_004_Logo_grp_png_f3d[];
+extern Gfx mat_prank_p_Material_001_Logo_grp_png_f3d[];
+extern Gfx prank_p_Logo_001_mesh_layer_1[];
+extern Gfx prank_p_material_revert_render_settings[];

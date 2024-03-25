@@ -33,3 +33,10 @@
 
 #include "combo_meter/model.inc.c"
 #include "combo_ghost/model.inc.c"
+#include "prank_mario/model.inc.c"
+#include "prank_mario/anims/data.inc.c"
+#include "prank_mario/anims/table.inc.c"
+#include "prank_box/model.inc.c"
+#include "prank_p/model.inc.c"
+#include "prank_m/model.inc.c"
+#include "prank_box/collision.inc.c"

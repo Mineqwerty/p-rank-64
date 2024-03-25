@@ -852,7 +852,20 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         starIndex = (obj->oBehParams >> 24) & 0x1F;
 #endif
         if (collect_p_rank_star(m->numCoins, starIndex) == 1) {
-            starGrabAction = ACT_STAR_DANCE_EXIT;
+            gMarioState->action = ACT_WAITING_FOR_DIALOG;
+        play_secondary_music(SEQ_STREAMED_P_RANK, 0, 255, 10);
+            spawn_object_relative(0, 0, 0, 0, m->marioObj, MODEL_NONE, bhvPRankManager);
+            gMarioState->starFlags = 0;
+            gMarioState->comboTime = 0;
+                gMarioState->comboCount = 0;
+        }
+        else if (collect_p_rank_star(m->numCoins, starIndex) == 2) {
+            gMarioState->action = ACT_WAITING_FOR_DIALOG;
+        play_secondary_music(SEQ_STREAMED_P_RANK, 0, 255, 10);
+            spawn_object_relative(1, 0, 0, 0, m->marioObj, MODEL_NONE, bhvPRankManager);
+            gMarioState->starFlags = 0;
+            gMarioState->comboTime = 0;
+                gMarioState->comboCount = 0;
         }
 
         m->numStars =

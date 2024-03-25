@@ -19,7 +19,7 @@ void bhv_ukiki_cage_star_loop(void) {
             // Initialization to see if the star is collected (blue) or not (yellow).
             if (o->oTimer == 0
                 && (save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum)) & STAR_FLAG_ACT_2)) {
-                cur_obj_set_model(MODEL_TRANSPARENT_STAR);
+                cur_obj_set_model(MODEL_STAR);
             }
 
             obj_copy_pos(o, o->parentObj);

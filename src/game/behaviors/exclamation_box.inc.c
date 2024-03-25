@@ -62,6 +62,10 @@ void exclamation_box_act_init(void) {
     } else {
         o->oAnimState = EXCLAMATION_BOX_ANIM_STATE_YELLOW;
         o->oAction = EXCLAMATION_BOX_ACT_ACTIVE;
+
+        if (gCurrLevelNum == LEVEL_THI && gMarioState->starFlags & 0x02) {
+        obj_mark_for_deletion(o);
+    }
     }
 }
 
